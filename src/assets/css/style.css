@@ -1,0 +1,30 @@
+@import url("./root.css");
+
+a{
+  text-decoration: none;
+  font-weight: 600;
+  font-size:var(--font-size);
+  transition: all 400ms ease-in-out;
+  color: var(--color-uno);
+}
+a:hover{
+  color: var(--color-cuatro)
+}
+
+
+h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 3.2em;
+  line-height: 1.1;
+
+}
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+
+}
+
+ul{
+  list-style: none;
+}

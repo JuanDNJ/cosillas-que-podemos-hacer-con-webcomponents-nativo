@@ -1,0 +1,104 @@
+/* GENERAL */
+:root{
+  --font-size: 18px;
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-weight: normal;
+  --box-sizing: border-box;
+  --width-bar-scroll-bar: 2px;
+  --padding: 1rem;
+}
+
+/* THEME APP */
+:root{
+  --color-primario: rgba(0, 0, 0, 1);
+  --color-secundario: rgba(255, 255, 0,1);
+  --color-claro: rgb(255, 250, 250);
+  --color-oscuro: rgb(47, 45, 45);
+  --color-uno: rgba(125, 150, 0,1);
+  --color-dos: rgba(125, 125, 0,1);
+  --color-tres: rgba(125,100, 0,1);
+  --color-cuatro: rgba(125, 50, 0,1);
+}
+
+/* FORMS */
+  /* INPUTS FORMS */
+  :root{
+    --padding-input: .4rem .8rem;
+    --margin-input: 0;
+    --border-radius-input: 4px;
+    --font-size-input: .8rem;
+  }
+/* UL */
+:root{
+  --padding-list: .2rem .4rem;
+  --margin-list: 0;
+  --border-radius-list: 4px;
+  --font-size-list: var(--font-size);
+  --backgound-list: transparent;
+  --color-list: var(--color-secundario);
+  --border-list: 2px solid var(--color-cuatro);
+  --list-style: none;
+}
+  /* li */
+  :root{
+    --padding-item-list: .2rem .4rem;
+    --margin-item-list: 0;
+    --border-radius-item-list: 4px;
+    --font-size-item-list: var(--font-size);
+    --backgound-item-list: transparent;
+    --color-item-list: var(--color-secundario);
+    --border-item-list: 2px solid var(--color-cuatro);
+  }
+/* LINKS */
+:root{
+  --padding-link: .2rem .4rem;
+  --margin-link: 0;
+  --font-weight: 600;
+  --border-radius-link: 4px;
+  --font-size-link: var(--font-size);
+  --backgound-link: transparent;
+  --color-link: var(--color-uno);
+  --border-link: 2px solid var(--color-secundario);
+  --text-decoration-link: none;
+  --transition-link: all 400ms ease-in-out;
+}
+
+/* BUTTONS */
+:root{
+  --padding-button: .2rem .4rem;
+  --margin-button: 0;
+  --border-radius-button: 4px;
+  --font-size-button: var(--font-size);
+  --backgound-button: transparent;
+  --color-button: var(--color-secundario);
+  --border-button: 2px solid var(--color-cuatro);
+}
+
+/* CONTROLLER SCROLL BAR APP */
+::-webkit-scrollbar{
+  width: var(--width-bar-scroll-bar);
+  color: var(--color-secundario)
+}
+
+/* CSS */
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: var(--box-sizing);
+}
+
+
+html,body{
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+}
+body {
+  display: grid;
+  background: var(--color-oscuro);
+  color: var(--color-claro);
+  overflow: hidden auto;
+}
