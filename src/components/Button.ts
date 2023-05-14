@@ -65,12 +65,10 @@ export default class ButtonNjv extends HTMLElement {
   }
   static createButton(textContent: string, options: {}) {
     const btn = document.createElement("button")
-
+    console.log(textContent,btn, options)
   }
   // TODDO: Seguir por aqui, a divertirse
   ready() {
-
-
     const template = this.template()
     const {content} = template
     this.append(content.cloneNode((true)))
@@ -79,9 +77,11 @@ export default class ButtonNjv extends HTMLElement {
       const form = this.querySelector(`#${this.getAttribute("id-btn")}`) as HTMLButtonElement
     }
   }
+
   disconnectedCallback() {
     this.innerHTML = /* html */ "";
   }
+
   funcion() {
     this.innerHTML = /*html*/ `
         <style>${ButtonNjv.styles}</style>
@@ -95,11 +95,13 @@ export default class ButtonNjv extends HTMLElement {
         </button>
       `
   }
-  attributeChangedCallback(attr: any, old: any, now: any) { }
 
+  attributeChangedCallback(attr: any, old: any, now: any) { }
 
   static get observedAttributes() {
     return [''];
   }
+
 }
+
 window.customElements.define("button-njv", ButtonNjv);
