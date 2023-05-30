@@ -1,13 +1,19 @@
+import { dispatch } from "../helpers"
+
 export default class ButtonNjv extends HTMLElement {
   constructor() {
     super()
-
+    this.attachShadow({mode: 'open'})
   }
   connectedCallback() {
     this.ready()
+    const button = this.shadowRoot!.querySelector('button') as HTMLButtonElement
+    if(button){
+      button.addEventListener("click", this.handleClickEvent.bind(this))
+    }
   }
   static get styles() {
-    return /* CSS */ `
+    return /*html*/ `
       :host{
         display: block;
       }
@@ -30,7 +36,7 @@ export default class ButtonNjv extends HTMLElement {
     `
   }
   static get buttonStyle() {
-    return /*CSS*/ `
+    return /*html*/ `
       button.btn{
         border: var(--border-button);
         border-radius: var(--border-radius-button);
@@ -44,38 +50,44 @@ export default class ButtonNjv extends HTMLElement {
           color: var(--color-cuatro);
           border-color: var(--color-dos)
       }
+      /*
       ::slotted(content){
         border: 4px solid red;
       }
+      */
     `
   }
   template(): HTMLTemplateElement {
     const template = document.createElement("template")
+    template.id = "button"
     const style = document.createElement("style")
     style.textContent = ButtonNjv.styles
-    template.setAttribute("shadowroot", "open")
-    template.appendChild(style)
-    template.id = "button"
+   
     const btn = document.createElement("button")
     btn.textContent = "Button Njv"
     btn.classList.add("btn")
-    template.appendChild(btn)
 
+    template.innerHTML = /*html*/ `
+      <style>
+        ${ButtonNjv.styles}
+      </style>
+      <button type="submit">
+        ${this.getAttribute('text') ?? `<slot name="content">Button NJV</slot>`}
+      </button>
+    `
     return template
   }
-  static createButton(textContent: string, options: {}) {
-    const btn = document.createElement("button")
-    console.log(textContent,btn, options)
+  handleClickEvent(e: Event) {
+    const sendEvent : CustomEvent = dispatch("clickButton",{}, e);
+   
+    console.log(e)
+    this.dispatchEvent(sendEvent)
   }
   // TODDO: Seguir por aqui, a divertirse
   ready() {
     const template = this.template()
-    const {content} = template
-    this.append(content.cloneNode((true)))
-
-    if (this.hasAttribute("form")) {
-      const form = this.querySelector(`#${this.getAttribute("id-btn")}`) as HTMLButtonElement
-    }
+    console.log(template)
+    this.shadowRoot!.appendChild(template.content.cloneNode((true)))
   }
 
   disconnectedCallback() {
@@ -96,7 +108,12 @@ export default class ButtonNjv extends HTMLElement {
       `
   }
 
-  attributeChangedCallback(attr: any, old: any, now: any) { }
+  attributeChangedCallback(attr: any, old: any, now: any) { 
+    if(typeof attr === 'string'){
+      throw new Error("attribute must be a string")
+    }
+    console.log("attribute changed", attr, now, old)
+  }
 
   static get observedAttributes() {
     return [''];

@@ -1,20 +1,24 @@
 import "../components/Button"
-export default class BienvenidaNjv extends HTMLElement {
+import Base from "../core/Base";
+export default class BienvenidaNjv extends Base {
   nameUser: string = JSON.parse(localStorage.getItem('nameUser')!) ?? 'unknown';
   constructor() {
     super()
-    this.attachShadow({ mode: 'open' })
   }
   connectedCallback() {
     this.ready()
     this.addEventListener("router-link", this.eventHandler)
-    
+    this.addEventListener("clickButton", (e: CustomEventInit) => {
+      // jajaja pensaba que daria error jajajaja
+      console.log(e.detail)
+      const form = this.shadowRoot!.querySelector("#changeName") as HTMLInputElement
+      // Fua estoy bloqueado
+    })
   }
   static get styles() {
-    return /* CSS */ `
-      :host{
-        display: block;
-      }
+    
+    return /*html*/ `
+      ${super.styles}
       form{
         display: flex;
         gap: 1rem;
@@ -47,6 +51,10 @@ export default class BienvenidaNjv extends HTMLElement {
       `
       this.shadowRoot!.querySelector("#changeName")?.addEventListener("submit", this.eventHandler.bind(this))
 
+      
+  }
+  mounted(callback: (arg: this) => any) {
+      
   }
   pruebas() {
     this.shadowRoot!.innerHTML = /*html*/ `
@@ -55,25 +63,20 @@ export default class BienvenidaNjv extends HTMLElement {
         <h2 part="h2">Bienvenid@ ${this.getAttribute("nameUser") ? this.getAttribute("nameUser"): this.nameUser}</h2>
         <form id="changeName">
         <input id="setNameUser" name="nameUser" type="text" placeholder="name" />
-      <button-njv type="submit">
+      <button-njv>
         <span slot="content">Send</span>
       </button-njv>
         </form>
       `
       this.shadowRoot!.querySelector("#changeName")?.addEventListener("submit", this.eventHandler.bind(this))
   }
-  disconnectedCallback() {
-    this.shadowRoot!.innerHTML = /* html */ "";
-  }
-
+ 
   attributeChangedCallback(attr:any, old:any, now:any) { 
 
     if(typeof attr !== "string"){
       throw new Error("This attribute must be a string")
     }
-   
-   
-    console.log(  this.setAttribute("nameUser", now))
+    console.log(  this.setAttribute("nameUser", now), old)
 
   }
 
